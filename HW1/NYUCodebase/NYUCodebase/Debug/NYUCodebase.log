@@ -1,0 +1,8 @@
+﻿  main.cpp
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(100): warning C4305: '+=': truncation from 'double' to 'float'
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(133): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(133): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(155): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(155): warning C4305: 'initializing': truncation from 'double' to 'float'
+  NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.exe
+  NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.pdb (Partial PDB)
