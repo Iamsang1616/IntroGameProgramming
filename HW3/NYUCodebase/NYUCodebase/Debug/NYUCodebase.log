@@ -1,20 +1,4 @@
-﻿  ShaderProgram.cpp
-  Matrix.cpp
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(148): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(149): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(150): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(151): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(165): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(166): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(167): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(168): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(172): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(173): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(174): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(175): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(213): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\matrix.cpp(214): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  main.cpp
+﻿  main.cpp
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(73): warning C4018: '<': signed/unsigned mismatch
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(142): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(143): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -47,6 +31,5 @@ c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\ny
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(587): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(589): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\iamsa\onedrive\documents\github\introgameprogramming\hw3\nyucodebase\nyucodebase\main.cpp(626): warning C4305: 'argument': truncation from 'double' to 'float'
-  Generating Code...
   NYUCodebase.vcxproj -> C:\Users\Iamsa\OneDrive\Documents\GitHub\IntroGameProgramming\HW3\NYUCodebase\Debug\NYUCodebase.exe
   NYUCodebase.vcxproj -> C:\Users\Iamsa\OneDrive\Documents\GitHub\IntroGameProgramming\HW3\NYUCodebase\Debug\NYUCodebase.pdb (Partial PDB)
