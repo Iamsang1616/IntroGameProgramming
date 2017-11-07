@@ -263,6 +263,9 @@ int main(int argc, char *argv[])
 	Entity platform3;
 	Entity coin1;
 
+	//Viewmatrix to translate everything by to simulate scrolling?
+	Matrix viewMatrix;
+
 	SDL_Event event;
 	bool done = false;
 	
@@ -347,13 +350,11 @@ int main(int argc, char *argv[])
 
 
 	//Set Player gravity
+
 	player.acceleration.y = -1.8;
 
 	//==============================Main Loop of the game============================================
 	while (!done) {
-
-		//Reset some parameters in each loop
-		//player.ResetCollision();
 
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -391,7 +392,7 @@ int main(int argc, char *argv[])
 
 		const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
-		glClearColor(0.2f, 0.4f, 0.3f, 1.0f);
+		glClearColor(0.6f, 0.4f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -406,6 +407,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		
+		//Reset player's acceleration value every frame
 		player.acceleration.x = 0;
 
 		if (keys[SDL_SCANCODE_A] || keys[SDL_SCANCODE_LEFT]) {
@@ -425,12 +427,19 @@ int main(int argc, char *argv[])
 			player.velocity.y = 5.0;
 		}
 
+
+		//Translate View Matrix by opposite of player movement	
+		viewMatrix.Translate(-player.velocity.x * FIXED_TIMESTEP, 0.0f, 0.0f);
+		if (!player.collidedBottom) {
+			viewMatrix.Translate(0.0f, -player.velocity.y * FIXED_TIMESTEP, 0.0f);
+		}
+
 		//Render all entities (Create array/vector for these if there's time)
-		program.SetModelviewMatrix(Platform_Matrix_1);
+		program.SetModelviewMatrix(Platform_Matrix_1 * viewMatrix);
 		platform.Render(program);
-		program.SetModelviewMatrix(Platform_Matrix_2);
+		program.SetModelviewMatrix(Platform_Matrix_2 * viewMatrix);
 		platform2.Render(program);
-		program.SetModelviewMatrix(Platform_Matrix_3);
+		program.SetModelviewMatrix(Platform_Matrix_3 * viewMatrix);
 		platform3.Render(program);
 
 
@@ -438,10 +447,10 @@ int main(int argc, char *argv[])
 		//If player is collided with a platform in a particular direction, shift it by some amount
 		if (player.CollidesWith(platform) ) {
 			if (player.collidedBottom){
-				player.position.y = platform.position.y + platform.size.y/2 + player.size.y / 2;
+				player.position.y = platform.position.y + platform.size.y / 2 + player.size.y / 2;
 			}
 			else if (player.collidedLeft) {
-				player.position.x = platform.position.x + platform.size.x/2 + player.size.x/2;
+				player.position.x = platform.position.x + platform.size.x / 2 + player.size.x / 2;
 			}
 			else if (player.collidedRight) {
 				player.position.x = platform.position.x - platform.size.x / 2 - player.size.x/2;
@@ -488,7 +497,7 @@ int main(int argc, char *argv[])
 
 		//Only render coins if they haven't been collided into yet
 		if (coin1.render) {
-			program.SetModelviewMatrix(Coin_Matrix_1);
+			program.SetModelviewMatrix(Coin_Matrix_1 * viewMatrix);
 			coin1.Render(program);
 		}
 
@@ -497,7 +506,7 @@ int main(int argc, char *argv[])
 		Player_Matrix.SetPosition(player.position.x, player.position.y, player.position.z);
 
 
-		program.SetModelviewMatrix(Player_Matrix);
+		program.SetModelviewMatrix(Player_Matrix * viewMatrix);
 		player.Render(program);
 
 

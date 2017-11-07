@@ -2,7 +2,7 @@
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(71): warning C4018: '<': signed/unsigned mismatch
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(164): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(164): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(350): warning C4305: '=': truncation from 'double' to 'float'
-d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(515): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(354): warning C4305: '=': truncation from 'double' to 'float'
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(524): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.exe
   NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.pdb (Partial PDB)
