@@ -1,0 +1,8 @@
+﻿  main.cpp
+c:\users\iamsa\onedrive\documents\college stuff\2017-2018\github\introgameprogramming\hw5\nyucodebase\nyucodebase\main.cpp(72): warning C4018: '<': signed/unsigned mismatch
+c:\users\iamsa\onedrive\documents\college stuff\2017-2018\github\introgameprogramming\hw5\nyucodebase\nyucodebase\main.cpp(165): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\iamsa\onedrive\documents\college stuff\2017-2018\github\introgameprogramming\hw5\nyucodebase\nyucodebase\main.cpp(165): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\iamsa\onedrive\documents\college stuff\2017-2018\github\introgameprogramming\hw5\nyucodebase\nyucodebase\main.cpp(364): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\iamsa\onedrive\documents\college stuff\2017-2018\github\introgameprogramming\hw5\nyucodebase\nyucodebase\main.cpp(536): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  NYUCodebase.vcxproj -> C:\Users\Iamsa\OneDrive\Documents\College stuff\2017-2018\GitHub\IntroGameProgramming\HW5\NYUCodebase\Debug\NYUCodebase.exe
+  NYUCodebase.vcxproj -> C:\Users\Iamsa\OneDrive\Documents\College stuff\2017-2018\GitHub\IntroGameProgramming\HW5\NYUCodebase\Debug\NYUCodebase.pdb (Partial PDB)
