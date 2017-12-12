@@ -220,7 +220,7 @@ public:
 	void Render(ShaderProgram &program);
 
 	bool CollidesWithEntity(const Entity &entity);
-	bool CollidesWithTile(float& distance);
+	bool CollidesWithTile(float& distance_x, float& distance_y);
 
 	Sheetsprite sprite;
 
@@ -655,11 +655,20 @@ int main(int argc, char *argv[])
 					playerList[1].velocity.y = 5.0;
 				}
 
-				float distance;
+				float distance_x;
+				float distance_y;
 
-				if (playerList[0].CollidesWithTile(distance)) {
-					playerList[0].position.y += distance + 0.001;
+				for (int i = 0; i < 2; i++) {
+					if (playerList[i].CollidesWithTile(distance_x, distance_y)) {
+						if ((playerList[i].position.y - playerList[i].size.y / 2) < distance_y) {
+							
+							playerList[i].position.y += ((playerList[i].position.y - playerList[i].size.y / 2) - distance_y ) + 0.001;
+							playerList[i].velocity.y = 0;
+						}
+						
+					}
 				}
+				
 
 
 				//Adjust player position based on calculations
@@ -792,7 +801,7 @@ bool Entity::CollidesWithEntity(const Entity& entity) {
 }
 
 //Check collision with tilemap tiles
-bool Entity::CollidesWithTile(float& distance) {
+bool Entity::CollidesWithTile(float& distance_x, float& distance_y) {
 
 
 	int ent_convert_x = (this->position.x / TILE_SIZE);
@@ -800,12 +809,13 @@ bool Entity::CollidesWithTile(float& distance) {
 
 	if (ent_convert_x > 0 && ent_convert_y > 0) {
 		if (ent_convert_x < mapWidth && ent_convert_y < mapHeight) {
-			int tileID = levelData[ent_convert_y][ent_convert_x];
-
+			int tileID = levelData[ent_convert_y][ent_convert_x] + 1;
+			cout << "Player 1's currently in a space with tileID: " << tileID << endl;
 			bool collided = (find(solidTiles.begin(), solidTiles.end(), tileID) != solidTiles.end());
 
 			if (collided) {
-				distance = (-TILE_SIZE * (ent_convert_y)) - this->position.y;
+				distance_y = (-TILE_SIZE * (ent_convert_y)) - (this->position.y);
+				distance_x = (TILE_SIZE * ent_convert_x) - (this->position.x);
 			}
 			return collided;
 		}
