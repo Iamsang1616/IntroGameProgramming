@@ -4,9 +4,9 @@ d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(91): 
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(184): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(184): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(521): warning C4305: '=': truncation from 'double' to 'float'
-d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(665): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(708): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(664): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(707): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(806): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(807): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-d:\github\cs3113\project_template\windows\nyucodebase\nyucodebase\main.cpp(808): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.exe
   NYUCodebase.vcxproj -> D:\GitHub\CS3113\project_template\Windows\NYUCodebase\Debug\NYUCodebase.pdb (Partial PDB)

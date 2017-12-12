@@ -660,11 +660,10 @@ int main(int argc, char *argv[])
 
 				for (int i = 0; i < 2; i++) {
 					if (playerList[i].CollidesWithTile(distance_x, distance_y)) {
-						if ((playerList[i].position.y - playerList[i].size.y / 2) < distance_y) {
-							
-							playerList[i].position.y += ((playerList[i].position.y - playerList[i].size.y / 2) - distance_y ) + 0.001;
-							playerList[i].velocity.y = 0;
-						}
+						
+							playerList[i].position.y += ( distance_y ) + playerList[i].size.y/2 + 0.001;
+						
+						
 						
 					}
 				}
@@ -805,7 +804,7 @@ bool Entity::CollidesWithTile(float& distance_x, float& distance_y) {
 
 
 	int ent_convert_x = (this->position.x / TILE_SIZE);
-	int ent_convert_y = -(this->position.y) / TILE_SIZE;
+	int ent_convert_y = -(this->position.y - this->size.y/2) / TILE_SIZE;
 
 	if (ent_convert_x > 0 && ent_convert_y > 0) {
 		if (ent_convert_x < mapWidth && ent_convert_y < mapHeight) {
@@ -815,6 +814,7 @@ bool Entity::CollidesWithTile(float& distance_x, float& distance_y) {
 
 			if (collided) {
 				distance_y = (-TILE_SIZE * (ent_convert_y)) - (this->position.y);
+				
 				distance_x = (TILE_SIZE * ent_convert_x) - (this->position.x);
 			}
 			return collided;
