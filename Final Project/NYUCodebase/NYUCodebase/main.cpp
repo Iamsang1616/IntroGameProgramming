@@ -47,7 +47,7 @@ float TILE_SIZE = 21.0/(692.0/8);
 int SPRITE_COUNT_X = 30;
 int SPRITE_COUNT_Y = 30;
 
-vector<int> solidTiles{ 2,33,62,63,64,93,96,303,303,306,336,484,557,660,695,721,723,724,726,730,736,754,755,756,767,767,796,841,858,889 };
+vector<int> solidTiles{ 2,33,62,63,64,93,96,303,303,306,336,459,484,557,660,695,721,723,724,726,730,736,754,755,756,767,767,796,841,858,889 };
 
 //Function to load texture into memory
 GLuint LoadTexture(const char* filePath) {
@@ -282,6 +282,7 @@ Entity p1Bullet;
 Entity p2Bullet;
 float scale_y = 1.0;
 float scale_x = 1.0;
+float screenshake_value;
 
 //Make array of Entities for players
 Entity playerList[] = { player1, player2 };
@@ -563,7 +564,7 @@ int main(int argc, char *argv[])
 
 		//Set Player gravity
 
-		playerList[i].acceleration.y = -3.8;
+		playerList[i].acceleration.y = -4.8;
 	}
 
 	p1Bullet.sprite = bullet_ss;
@@ -616,6 +617,8 @@ int main(int argc, char *argv[])
 			accumulator = elapsed;
 			continue;
 		}
+
+		//screenshake_value += elapsed;
 
 		Matrix TitleTextMatrix;
 		Matrix CreditTextMatrix;
@@ -707,7 +710,7 @@ int main(int argc, char *argv[])
 
 					SubtitleMatrix.Translate(-1.0, -1.0, 0.0);
 					program.SetModelviewMatrix(SubtitleMatrix);
-					DrawText(&program, fontsheet, "Press ESC to quit", 0.3, 0.0);
+					DrawText(&program, fontsheet, "Press ESC to quit or SPACE to restart", 0.3, 0.0);
 					gameover = true;
 				}
 
@@ -715,7 +718,28 @@ int main(int argc, char *argv[])
 				if (keys[SDL_SCANCODE_ESCAPE]) {
 					done = true;
 				}
+				else if (keys[SDL_SCANCODE_SPACE]) {
+					gamestate = STATE_MAIN_MENU;
 
+					for (int i = 0; i < 2; i++) {
+						playerList[i].dead = false;
+						playerList[i].should_render = true;
+					}
+					
+					p1Bullet.fired = false;
+					p1Bullet.should_render = false;
+					Bullet1_Matrix.SetPosition(-8, -8, 0);
+					p2Bullet.fired = false;
+					p2Bullet.should_render = false;
+					Bullet2_Matrix.SetPosition(-8, -8, 0);
+					
+					
+					loadMap("TitleMap.txt");
+					viewMatrix.Identity();
+					viewMatrix.Translate(-16 * TILE_SIZE, 13 * TILE_SIZE, 0.0);
+
+					Mix_PlayMusic(Title_Music, -1);
+				}
 
 
 
@@ -745,9 +769,12 @@ int main(int argc, char *argv[])
 					//Player 1's shoot (only if singular bullet hasn't been fired yet)
 					if (keys[SDL_SCANCODE_Q] && !p1Bullet.fired) {
 						p1Bullet.fired = true;
+						p1Bullet.should_render = true;
 						p1Bullet.position = playerList[0].position;
 						Mix_PlayChannel(-1, ShootSound, 0);
 
+						viewMatrix.Translate(0.0f, sin(screenshake_value * 0.3)* 0.2, 0.0f);
+						
 
 						if (playerList[0].faceleft){
 							Bullet1_Matrix.SetPosition(playerList[0].position.x + playerList[0].size.x/2, playerList[0].position.y, 0.0);
@@ -766,13 +793,14 @@ int main(int argc, char *argv[])
 
 					//Player 2's jump
 					if (keys[SDL_SCANCODE_UP] && playerList[1].jumps++ < 2) {
-						playerList[1].velocity.y = 5.0;
+						playerList[1].velocity.y = 4.0;
 						Mix_PlayChannel(-1, P2_JumpSound, 0);
 					}
 					//Player 2's shoot (only if singular bullet hasn't been fired yet)
 					if (keys[SDL_SCANCODE_RSHIFT] && !p2Bullet.fired) {
 						p2Bullet.fired = true;
 						p2Bullet.position = playerList[1].position;
+						p2Bullet.should_render = true;
 
 						if (playerList[1].faceleft) {
 							Bullet1_Matrix.SetPosition(playerList[1].position.x + playerList[1].size.x / 2, playerList[1].position.y, 0.0);
@@ -822,14 +850,14 @@ int main(int argc, char *argv[])
 				//Player1 controls
 				if (keys[SDL_SCANCODE_A]) {
 
-					playerList[0].acceleration.x -= (200 * FIXED_TIMESTEP);
+					playerList[0].acceleration.x -= (400 * FIXED_TIMESTEP);
 					playerList[0].faceleft = true;
 					playerList[0].faceright = false;
 
 				}
 				if (keys[SDL_SCANCODE_D]) {
 
-					playerList[0].acceleration.x += (200 * FIXED_TIMESTEP);
+					playerList[0].acceleration.x += (400 * FIXED_TIMESTEP);
 					playerList[0].faceleft = false;
 					playerList[0].faceright = true;
 
@@ -846,14 +874,14 @@ int main(int argc, char *argv[])
 				//Player2 controls
 				if (keys[SDL_SCANCODE_LEFT]) {
 
-					playerList[1].acceleration.x -= (200 * FIXED_TIMESTEP);
+					playerList[1].acceleration.x -= (400 * FIXED_TIMESTEP);
 					playerList[1].faceleft = true;
 					playerList[1].faceright = false;
 
 				}
 				if (keys[SDL_SCANCODE_RIGHT]) {
 
-					playerList[1].acceleration.x += (200 * FIXED_TIMESTEP);
+					playerList[1].acceleration.x += (400 * FIXED_TIMESTEP);
 					playerList[1].faceleft = false;
 					playerList[1].faceright = true;
 
@@ -874,7 +902,7 @@ int main(int argc, char *argv[])
 
 
 					if (playerList[i].CollidesWithTile(distance_x, distance_y)) {
-						
+							
 							playerList[i].position.y += ( distance_y ) + playerList[i].size.y/2 + 0.001;
 							playerList[i].collidedBottom = true;
 							playerList[i].velocity.y = 0.0;
@@ -884,7 +912,7 @@ int main(int argc, char *argv[])
 				
 				//Check for collision with tiles for bullet entities
 
-				if (p1Bullet.CollidesWithTile(distance_x, distance_y) || p1Bullet.position.x < -5.33 || p1Bullet.position.x > 5.33) {
+				if (p1Bullet.CollidesWithTile(distance_x, distance_y) || p1Bullet.position.x < -5.33 || p1Bullet.position.x > 10) {
 					p1Bullet.acceleration.x = 0.0f;
 					p1Bullet.velocity.x = 0.0f;
 					p1Bullet.position.x = -8.0f;
@@ -892,14 +920,11 @@ int main(int argc, char *argv[])
 					p1Bullet.fired = false;
 
 
-					Bullet1_Matrix.SetPosition(-2.0f, -2.0f, 0);
-
-
-					//viewMatrix.Translate(0.0f, sin(0.3*0.2)*0.2, 0.0f);
+					Bullet1_Matrix.SetPosition(-8.0f, -8.0f, 0);
 
 				}
 
-				if (p2Bullet.CollidesWithTile(distance_x, distance_y) || p2Bullet.position.x < -5.33 || p2Bullet.position.x > 5.33) {
+				if (p2Bullet.CollidesWithTile(distance_x, distance_y) || p2Bullet.position.x < -5.33 || p2Bullet.position.x > 10) {
 					p2Bullet.acceleration.x = 0.0f;
 					p2Bullet.velocity.x = 0.0f;
 					p2Bullet.position.x = -8.0f;
@@ -907,7 +932,7 @@ int main(int argc, char *argv[])
 					p2Bullet.fired = false;
 
 
-					Bullet2_Matrix.SetPosition(-2.0f, -2.0f, 0);
+					Bullet2_Matrix.SetPosition(-8.0f, -8.0f, 0);
 
 				}
 
@@ -925,7 +950,7 @@ int main(int argc, char *argv[])
 				}
 
 
-				cout << "Player 1 velocity: " << playerList[0].velocity.y << endl;
+				//cout << "Player 1 velocity: " << playerList[0].velocity.y << endl;
 
 				//Adjust player position based on calculations
 				Player1_Matrix.SetPosition(playerList[0].position.x, playerList[0].position.y, playerList[0].position.z);
@@ -933,9 +958,9 @@ int main(int argc, char *argv[])
 
 				
 				//map velocity to scale values then scale models by them
-				scale_y = mapValue(fabs(playerList[0].velocity.y), 0.0, 3.0, 1.0, 1.2);
-				scale_x = mapValue(fabs(playerList[0].velocity.x), 3.0, 0.0, 0.8, 1.0);
-				Player1_Matrix.Scale(-scale_x, scale_y, 1.0);
+				scale_y = mapValue(fabs(playerList[0].velocity.y), 0.5, 15.0, 1.0, 1.2);
+				scale_x = mapValue(fabs(playerList[0].velocity.y), 15.0, 0.0, 1.0, 1.0);
+				Player1_Matrix.Scale(scale_x, scale_y, 1.0);
 				
 				
 
@@ -1097,19 +1122,23 @@ bool Entity::CollidesWithEntity(const Entity& entity) {
 //Check collision with tilemap tiles
 bool Entity::CollidesWithTile(float& distance_x, float& distance_y) {
 
+	if (should_render == false) {
+		return false;
+	}
+
 	//Convert current position of the testing point(s) into tile coordinates
 	int ent_convert_x = (this->position.x - this->size.x/2)/ TILE_SIZE;
 	int ent_convert_y = -(this->position.y - this->size.y/2) / TILE_SIZE;
 
 	//Determine if the tile coordinates are both non-negative and within the bounds of the map
 	if (ent_convert_x >= 0 && ent_convert_y >= 0) {
-		if (ent_convert_x <= mapWidth && ent_convert_y < mapHeight) {
+		if (ent_convert_x < mapWidth && ent_convert_y < mapHeight) {
 
 			//Determine tileID closest to the tested collision point
 			int tileID = levelData[ent_convert_y][ent_convert_x] + 1;
 
 			//Debug statement
-			//cout << "Player 1's currently in position (" << ent_convert_x << ", " << ent_convert_y << "), a space with tileID: " << tileID << endl;
+			cout << "Player 1's currently in position (" << ent_convert_x << ", " << ent_convert_y << "), a space with tileID: " << tileID << endl;
 
 			//Determine if the tileID of the collided tile is in the list of solid ones
 			bool collided = (find(solidTiles.begin(), solidTiles.end(), tileID) != solidTiles.end());
@@ -1122,6 +1151,12 @@ bool Entity::CollidesWithTile(float& distance_x, float& distance_y) {
 			}
 			return collided;
 		}
+		cout << "Player out of bounds" << endl;
+
+		return false;
+
 	}
+
 	return false;
+
 }
